@@ -1,0 +1,104 @@
+﻿@model Web_BanXeMoTo.Controllers.ViewModelNV
+
+@{ ViewData["Title"] = "Detail";
+   Layout = "~/Views/Shared/_LayoutManager.cshtml"; 
+   
+}
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý nhân viên
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link">
+                <span>Nhân viên </span>
+            </a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            <label asp-for="nhanVien.Idnv" class="control-label"></label>
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.nhanVien.Idnv
+                        </dd>
+                        <dt class="col-sm-2">
+                            <label asp-for="nhanVien.Idtype" class="control-label"></label>
+                        </dt>
+                        <dd class="col-sm-10">
+                            @foreach (var nv in Model.ListType)
+                            {
+                                if (nv.Idtype == @Model.nhanVien.Idtype)
+                                {
+                                    @nv.Name 
+                                    break;
+                                }
+                            }
+                        </dd>
+                        <dt class="col-sm-2">
+                            <label asp-for="nhanVien.Email" class="control-label"></label>
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.nhanVien.Email
+                        </dd>
+                        <dt class="col-sm-2">
+                            <label asp-for="nhanVien.Pass" class="control-label"></label>
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.nhanVien.Pass
+                        </dd>
+
+                        <dt class="col-sm-2">
+                            <label asp-for="nhanVien.TenNv" class="control-label"></label>
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.nhanVien.TenNv
+                        </dd>
+                        <dt class="col-sm-2">
+                            <label asp-for="nhanVien.DienThoai" class="control-label"></label>
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.nhanVien.DienThoai
+                        </dd>
+                        <dt class="col-sm-2">
+                            <label asp-for="nhanVien.DiaChi" class="control-label"></label>
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.nhanVien.DiaChi
+                        </dd>
+                        <dt class="col-sm-2">
+                            <label asp-for="nhanVien.Cmnd" class="control-label"></label>
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.nhanVien.Cmnd
+                        </dd>
+                        <dt class="col-sm-2">
+                            <label asp-for="nhanVien.Avatar" class="control-label"></label>
+                        </dt>
+                        <dd class="col-sm-10">
+                            <img src="@("/img/"+Model.nhanVien.Avatar)" asp-append-version="true" width="200" height="150" class="rounded-circle" />
+                        </dd>
+                    </dl>
+
+
+                    <hr />
+                    <div class="form-group">
+                        <a asp-action="Edit" asp-route-id="@Model.nhanVien.Idnv" class="btn btn-sm btn-outline-warning">Sửa</a>
+                        <a asp-action="Index" class="btn btn-sm btn-outline-secondary">Trở về</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

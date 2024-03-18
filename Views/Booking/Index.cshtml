@@ -1,0 +1,61 @@
+﻿@model Web_BanXeMoTo.Controllers.ViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+<section class="myBooking">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form class="bookingForm__container">
+                    <div class="form-group">
+                        @*<label for="">Mẫu xe</label>*@
+                        <label asp-for="datlich.Idmau" class="control-label"></label>
+                        <select asp-for="mauXe.Idmau" class="form-control">
+                            @foreach (var hang in Model.ListHang)
+                            {
+                                <option id="booking__optHang" disabled>@hang.TenHang</option>
+
+                                @foreach (var mau in Model.ListMauXe)
+                                {
+                                    if (mau.Idhang == hang.Idhang)
+                                    {
+                                        <option value="@mau.Idmau">&nbsp; &nbsp;@mau.TenXe</option>
+                                    }
+                                }
+                            }
+
+                        </select>
+                        @*<input type="text" class="form-control" id="">*@
+                        @*<td>@{Html.RenderPartial("SelectMau", "Booking");}</td>*@
+                    </div>
+                    <div class="form-group">
+                        <label for="cusEmail">Email</label>
+                        <input type="email" class="form-control" id="cusEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="cusName">Họ tên</label>
+                        <input type="text" class="form-control" id="cusName">
+                    </div>
+                    <div class="form-group">
+                        <label for="cusAddress">Địa chỉ</label>
+                        <input type="text" class="form-control" id="cusAddress">
+                    </div>
+                    <div class="form-group">
+                        <label for="cusPhone">SĐT</label>
+                        <input type="text" class="form-control" id="cusPhone">
+                    </div>
+                    <div class="form-group">
+                        <label for="cusDate">Ngày đặt</label>
+                        <input type="date" class="form-control" id="cusDate">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

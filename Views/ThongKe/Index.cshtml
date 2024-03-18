@@ -1,0 +1,154 @@
+﻿@model Web_BanXeMoTo.Controllers.HoaDonViewModel
+
+@using X.PagedList.Mvc.Core;
+@using Microsoft.AspNetCore.Mvc;
+
+@{ ViewData["Title"] = "Thống kê";
+
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+    double Total = 0;
+    }
+
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    <h2 style="font-weight:500">Thống kê doanh số</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link active ">
+                <span>Thống kê doanh số</span>
+            </a>
+        </li>
+        @*<li class="nav-item">
+                <a asp-action="ExportExcel" class="nav-link ">
+                    <span>Xuất Excel</span>
+                </a>
+            </li>*@
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    @using (Html.BeginForm("Index", "ThongKe", FormMethod.Get, new { @style = "float: right; width: 40%" }))
+                    {
+                        <input type="month" id="searchString" name="searchString" >
+                        <input type="submit" value="Tìm kiếm" class="btn btn-outline-info" style="margin-bottom:5px" />}
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label asp-for="HoaDon.Idhd" class="control-label"></label>
+                                </th>
+
+                                <th>
+                                    <label asp-for="HoaDon.IdkhNavigation.TenKh" class="control-label"></label>
+                                </th>
+
+                                <th>
+                                    <label class="control-label">@Html.ActionLink("Ngày đặt", "Index", new { sortOrder = ViewBag.NameSortParm })</label>
+                                </th>
+                                <th>
+                                    <label class="control-label">Tổng tiền</label>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.HoaDons)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Idhd
+                                    </td>
+
+                                    <td>
+                                        @foreach (var kh in Model.ListKhachHang)
+                                        {
+
+                                            if (item.Idkh == kh.Idkh)
+                                            {
+                                                @kh.TenKh}
+                                        }
+                                    </td>
+                                    <td>
+                                        @item.NgayDat
+                                    </td>
+                                    <td>
+                                        @{ double amount = 0;
+                                            @foreach (var cthd in Model.ListChiTietHd)
+                                            {
+
+                                                if (item.Idhd == cthd.Idhd)
+                                                {
+                                                    amount += ((cthd.KhuyenMai == 0 ? ((Int64)cthd.GiaBan) : (((Int64)cthd.GiaBan) - ((Int64)cthd.GiaBan) * (Int64)cthd.KhuyenMai / 100)));
+                                                }
+                                            }
+                                            @string.Format("{0:N0}", ((double)@amount))
+                                            Total += amount;
+                                        } VNĐ
+                                    </td>
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@item.Idhd" class="btn btn-sm btn-outline-info">Chi tiết</a>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Tổng doanh thu @ViewBag.monthyear :</td>
+                                <td>
+                                    @string.Format("{0:N0}", ((double)@Total)) VNĐ
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(Model.HoaDons, page => Url.Action("Index",
+                                                     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@section monthPicker{
+    <script src="//lib/jquery-ui-1.10.2/ui/jquery.ui.datepicker.js"></script>
+    <script>
+        jQuery(function ($) {
+            $.datepicker.regional["vi"] =
+            {
+                closeText: "Đóng",
+                prevText: "Trước",
+                nextText: "Sau",
+                currentText: "Hôm nay",
+                monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+                monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+                dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+                dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+                dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+                weekHeader: "Tuần",
+                dateFormat: "dd/mm/yy",
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ""
+            };
+
+            $.datepicker.setDefaults($("#searchString").datepicker.regional["vi"]);
+        });
+        $.datepicker.setDefaults(
+            $.extend(
+                { 'dateFormat': 'dd-mm-yy' },   
+                $.datepicker.regional['vi']
+            )
+        );
+    </script>
+}*@

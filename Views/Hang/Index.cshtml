@@ -1,0 +1,104 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+@*@model Web_BanXeMoTo.Controllers.ViewModel*@
+@*@model Web_BanXeMoTo.Models.Hang*@
+@model IEnumerable<Web_BanXeMoTo.Models.Hang>
+@using System.Collections.Generic;
+@using X.PagedList.Mvc.Core;
+@using Microsoft.AspNetCore.Mvc;
+
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý Hãng xe
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link active ">
+                <span>Hãng xe</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link ">
+                <span>Thêm hãng xe</span>
+            </a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    @using (Html.BeginForm("Index", "Hang", FormMethod.Get, new { @style = "float: right; width: 40%" }))
+                    {
+                        <input type="text" id="searchString" name="searchString" placeholder="Find by id or name">
+                        <input type="submit" value="Search" class="btn btn-outline-info" style="margin-bottom:5px" />
+                    }
+                    <br />
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label class="control-label">@Html.ActionLink("ID Hãng", "Index", new { sortOrder = ViewBag.NameSortParm })</label>
+                                </th>
+                                <th>
+                                    @*<label asp-for="@Model.TenHang" class="control-label"></label>*@
+                                    @Html.DisplayNameFor(model => model.TenHang)
+                                </th>
+                                @*<th class="text-center">
+                                <label class="control-label">Số lượng</label>
+                                </th>*@
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Idhang
+                                    </td>
+
+                                    <td>
+                                        @item.TenHang
+                                    </td>
+                                    @*<td class="text-center">
+                                @{ int amount = 0;
+                                @foreach (var mauxe in Model.ListMauXe)
+                                {
+                                if (mauxe.Idhang == item.Idhang)
+                                {
+                                amount++;
+                                }
+                                }
+                                @amount }
+
+                                </td>*@
+                                    <td style="width: 207.6px;">
+                                        <a asp-action="Edit" asp-route-id="@item.Idhang" class="btn  btn-outline-warning">Sửa</a>
+                                        <form asp-action="Delete" asp-route-id="@item.Idhang">
+                                            <input type="submit" value="Xóa" class="btn btn-outline-danger" hidden />
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    @*@Html.PagedListPager(Model.ListHangs, page => Url.Action("Index",
+                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

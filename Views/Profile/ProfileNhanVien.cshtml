@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Thông tin cá nhân";
+
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+@model Web_BanXeMoTo.Models.NhanVien
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <form asp-action="ProfileNhanVien" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <div class="card-img ">
+                            @*<img src="@(Model.nhanVien != null? Url.Content("/img"+Model.nhanVien.Avt) :"/img/icon.png")" height="200" width="200" id="previewImg" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />*@
+                            <img src="@("/img/"+Model.Avatar)" id="output" height="200" width="200" style="margin: auto;display: block;border-radius: 50%;">
+                        </div>
+
+                    </div>
+
+                    <input asp-for="Idnv" class="" readonly hidden />
+
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <div class="col-md-12">
+                            <input asp-for="Email" class="form-control" readonly />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="TenNv" class="control-label"></label>
+                        <div class="col-md-12">
+                            <input asp-for="TenNv" class="form-control" />
+                            <span asp-validation-for="TenNv" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cmnd" class="control-label"></label>
+                        <div class="col-md-12">
+                            <input asp-for="Cmnd" class="form-control" />
+                            <span asp-validation-for="Cmnd" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DienThoai" class="control-label"></label>
+                        <div class="col-md-12">
+                            <input asp-for="DienThoai" class="form-control" />
+                            <span asp-validation-for="DienThoai" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DiaChi" class="control-label"></label>
+                        <div class="col-md-12">
+                            <input asp-for="DiaChi" class="form-control" />
+                            <span asp-validation-for="DiaChi" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="UploadHinh" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Pass" class="control-label"></label>
+                        <div class="col-md-12">
+                            <input name="Pass" type="password" class="form-control" placeholder="Điền mật khẩu để thay đổi thông tin" />
+                            <span asp-validation-for="Pass" class="text-danger"></span>
+                            <span class="text-danger">@ViewBag.ErrorPass</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

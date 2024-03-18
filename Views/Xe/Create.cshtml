@@ -1,0 +1,56 @@
+﻿@model Web_BanXeMoTo.Controllers.ViewModel
+
+@{
+    ViewData["Title"] = "Create";
+
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    Quản lý Xe
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link  ">
+                <span>Xe</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link active">
+                <span>Thêm Xe</span>
+            </a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-7">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="position-relative form-group">
+                            <label class="control-label">Tên xe</label>
+                            <select asp-for="xe.Idmau" class="form-control">
+                                @foreach (var item in Model.ListMauXe)
+                                {
+                                    <option value="@item.Idmau">@item.TenXe</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Thêm" class="btn btn-primary" />
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

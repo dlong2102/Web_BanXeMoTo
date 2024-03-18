@@ -1,0 +1,84 @@
+﻿@model Web_BanXeMoTo.Models.DatLich
+
+@{ ViewData["Title"] = "Tạo lịch";
+                Layout = "~/Views/Shared/_LayoutManager.cshtml"; }
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý Đặt lịch
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link  ">
+                <span>Danh sách Lịch đã đặt</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link active">
+                <span>Tạo hóa đơn</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="DanhSachHomNay" class="nav-link ">
+                <span>Danh sách Lịch đã đặt hôm nay</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="DanhSachChoXacNhan" class="nav-link ">
+                <span>Danh sách chờ xác nhận</span>
+            </a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        @*<div class="form-group">
+                <label asp-for="IddatLich" class="control-label"></label>
+                <input asp-for="IddatLich" class="form-control" />
+                <span asp-validation-for="IddatLich" class="text-danger"></span>
+            </div>*@
+                        <div class="form-group">
+                            <label asp-for="Idmau" class="control-label"></label>
+                            <select asp-for="Idmau" class="form-control" asp-items="ViewBag.Idmau"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Idkh" class="control-label"></label>
+                            <select asp-for="Idkh" class="form-control" asp-items="ViewBag.Idkh"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NgayDat" class="control-label"></label>
+                            <input asp-for="NgayDat" class="form-control" />
+                            <span asp-validation-for="NgayDat" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="GhiChu" class="control-label"></label>
+                            <input asp-for="GhiChu" class="form-control" />
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="XacNhan" /> @Html.DisplayNameFor(model => model.XacNhan)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+                    <div>
+                        <a asp-action="Index" class="btn btn-secondary">Trở về</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

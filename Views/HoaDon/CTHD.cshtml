@@ -1,0 +1,86 @@
+﻿@model Web_BanXeMoTo.Controllers.HoaDonViewModel
+
+@{
+    ViewData["Title"] = "Tạo chi tiết hóa đơn";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý Hóa đơn
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link  ">
+                <span>Danh sách hóa đơn</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link ">
+                <span>Tạo hóa đơn</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="CTHD" class="nav-link active ">
+                <span>Thêm xe</span>
+            </a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <form asp-action="CTHD">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="ChiTietHd.Idhd" class="control-label"></label>
+                            <input asp-for="ChiTietHd.Idhd" class="form-control" readonly />
+                            <span asp-validation-for="ChiTietHd.Idhd" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"> Xe </label>
+                            <select asp-for="ChiTietHd.Idxe" class="form-control">
+                                @foreach (var mauXe in Model.ListMauXe)
+                                {
+                                    <option disabled style="font-weight:900">- @mauXe.IdhangNavigation.TenHang :&emsp;@mauXe.TenXe </option>
+                                    @foreach (var xe in Model.ListXe)
+                                    {
+                                        if (mauXe.Idmau == xe.Idmau && xe.TrangThai == true)
+                                        {
+                                            <option value="@xe.Idxe">&emsp;&emsp;+ @xe.Idxe</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                            <span class="text-danger">@ViewBag.Error</span>
+
+                        </div>
+                        @*<div class="form-group">
+            <label asp-for="ChiTietHd.KhuyenMai" class="control-label"></label>
+            <input asp-for="ChiTietHd.KhuyenMai" class="form-control" readonly value="" >
+            <span asp-validation-for="ChiTietHd.KhuyenMai" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ChiTietHd.GiaBan" class="control-label"></label>
+            <input asp-for="ChiTietHd.GiaBan" class="form-control" readonly value=""/>
+            <span asp-validation-for="ChiTietHd.GiaBan" class="text-danger"></span>
+        </div>*@
+                    <div class="form-group">
+                        <input type="submit" value="Thêm xe vào hóa đơn" class="btn btn-primary" />
+                        <a asp-action="Details" asp-route-id="@Model.ChiTietHd.Idhd" class="btn btn-secondary">Trở về</a>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+﻿@model Web_BanXeMoTo.Controllers.ViewModelNV;
+
+@{ ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml"; }
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý nhân viên
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link  ">
+                <span>Danh sách nhân viên</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link active ">
+                <span>Thêm nhân viên </span>
+            </a>
+
+
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <div class="card-img ">
+                                @*<img src="@(Model.nhanVien != null? Url.Content("/img"+Model.nhanVien.Avt) :"/img/icon.png")" height="200" width="200" id="previewImg" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />*@
+                                <img src="@("/img/"+Model.nhanVien.Avatar != null? Url.Content("/img/"+Model.nhanVien.Avatar) :"/img/icon.png")" id="output" height="200" width="200" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />
+                            </div>
+
+                        </div>
+                        @*<input asp-for="nhanVien.UpLoadAvt" accept="image/*"  onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])"/>*@
+
+                        @*<input asp-for="nhanVien.UpLoadAvt" accept="image/*" onchange="ChangeImage(this,'#previewImg')" />*@
+
+                        <div class="form-group">
+                            <label asp-for="nhanVien.Email" class="control-label"></label>
+                            <input asp-for="nhanVien.Email" class="form-control" />
+                            <span asp-validation-for="nhanVien.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="nhanVien.Pass" class="control-label"></label>
+                            <input asp-for="nhanVien.Pass" class="form-control" type="password" />
+                            <span asp-validation-for="nhanVien.Pass" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="nhanVien.TenNv" class="control-label"></label>
+                            <input asp-for="nhanVien.TenNv" class="form-control" />
+                            <span asp-validation-for="nhanVien.TenNv" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="nhanVien.DienThoai" class="control-label"></label>
+                            <input asp-for="nhanVien.DienThoai" class="form-control" />
+                            <span asp-validation-for="nhanVien.DienThoai" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="nhanVien.DiaChi" class="control-label"></label>
+                            <input asp-for="nhanVien.DiaChi" class="form-control" />
+                            <span asp-validation-for="nhanVien.DiaChi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="nhanVien.Cmnd" class="control-label"></label>
+                            <input asp-for="nhanVien.Cmnd" class="form-control" />
+                            <span asp-validation-for="nhanVien.Cmnd" class="text-danger"></span>
+                        </div>
+                        <div class="position-relative form-group">
+                            <label asp-for="nhanVien.Idtype" class="control-label"></label>
+                            <select asp-for="nhanVien.Idtype" class="form-control">
+                                @foreach (var item in Model.ListType)
+                                {
+                    <option value="@item.Idtype">@item.Name </option>}
+                            </select>
+                        </div>
+                        @*<input asp-for="nhanVien.UpLoadAvt" accept="image/*" onchange="ChangeImage(this,'#previewImg')" />*@
+                        <input asp-for="nhanVien.UploadHinh" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" />
+                        <div class="form-group">
+                            <input type="submit" value="Thêm" class="btn btn-primary" />
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

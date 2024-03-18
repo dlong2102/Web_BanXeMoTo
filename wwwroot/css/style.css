@@ -1,0 +1,45 @@
+﻿.avt {
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+}
+.btn-active {
+    background-color: #f0f9ff;
+    border-radius: 0.25rem;
+}
+.position-mota{
+    position: absolute;
+    right: 0;
+}
+.app-container .app-main div.margin-menu {
+    margin-top: 0px
+}
+
+.pagination-container > .pagination > li > span {
+    background-color: white;
+    border: 1px solid #1e88e5;
+    color: #1e88e5;
+    height: 34px;
+    padding-top: 3px;
+    width: 34px;
+    text-align: center;
+    margin: 1px;
+    border-radius: 2px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+#searchString {
+    width: 70%;
+    height: 35px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 18px;
+    background-color: white;
+    background-image: url(searchicon.png);
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 2px 4px 2px 8px;
+}

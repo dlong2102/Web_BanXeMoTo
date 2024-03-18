@@ -1,0 +1,60 @@
+﻿@model Web_BanXeMoTo.Controllers.ViewModel
+
+
+
+@{
+    ViewData["Title"] = "Create";
+
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý Mẫu xe
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link  ">
+                <span>Mẫu xe</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link active">
+                <span>Thêm mẫu xe</span>
+            </a>
+
+
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="mauXe.Idmau" class="control-label"></label>
+                            <input asp-for="mauXe.Idmau" class="form-control" />
+                            <span asp-validation-for="mauXe.Idmau" class="text-danger"></span>
+                        </div>
+                        <partial name="_FormEdit" model="Model" />
+                        <div class="form-group">
+                            <input type="submit" value="Thêm" class="btn btn-primary" />
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

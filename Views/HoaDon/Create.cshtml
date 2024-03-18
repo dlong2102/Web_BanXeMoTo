@@ -1,0 +1,71 @@
+﻿@model Web_BanXeMoTo.Controllers.HoaDonViewModel
+
+@{
+    ViewData["Title"] = "Tạo hóa đơn";
+
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý Hóa đơn
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link  ">
+                <span>Danh sách hóa đơn</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link active">
+                <span>Tạo hóa đơn</span>
+            </a>
+
+
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="HoaDon.Idhd" class="control-label"></label>
+                            <input asp-for="HoaDon.Idhd" class="form-control" readonly />
+                            <span asp-validation-for="HoaDon.Idhd" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HoaDon.Idkh" class="control-label"></label>
+                            <select asp-for="HoaDon.Idkh" class="form-control">
+                                @foreach (var item in Model.ListKhachHang)
+                                {
+                                    <option value="@item.Idkh"><span style="font-weight:900">ID: @item.Idkh </span>&emsp;@item.TenKh</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HoaDon.NgayDat" class="control-label"></label>
+                            <input asp-for="HoaDon.NgayDat" class="form-control" value="0001-01-01T" />
+                            <span asp-validation-for="HoaDon.NgayDat" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Tạo hóa đơn" class="btn btn-primary" />
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

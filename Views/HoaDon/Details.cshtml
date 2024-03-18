@@ -1,0 +1,90 @@
+﻿@model Web_BanXeMoTo.Controllers.HoaDonViewModel
+
+@{
+    ViewData["Title"] = "Chi tiết hóa đơn";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý Hóa đơn
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link active">
+                <span>Danh sách hóa đơn</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link ">
+                <span>Tạo hóa đơn</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="CTHD" class="nav-link " asp-route-id="@Model.ChiTietHd.Idhd">
+                <span>Thêm xe</span>
+            </a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <table class="table table-hover table-sm">
+                        <h3>ID Hóa đơn: @Model.ChiTietHd.Idhd</h3>
+                        <br />
+                        <thead>
+                            <tr>
+
+                                <th>
+                                    <label asp-for="ChiTietHd.Idxe" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="ChiTietHd.KhuyenMai" class="control-label"></label>
+                                </th>
+
+                                <th>
+                                    <label asp-for="ChiTietHd.GiaBan" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label class="control-label">Thành tiền</label>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ListChiTietHd)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Idxe)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.KhuyenMai)
+                                </td>
+                                <td>
+                                    @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ
+                                </td>
+                                <td>
+                                    @string.Format("{0:N0}", ((item.KhuyenMai == 0 ? ((double)item.GiaBan) : (((double)item.GiaBan) - ((double)item.GiaBan) * (double)item.KhuyenMai / 100)))) VNĐ
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Xóa", "DeleteCTHD", new { ID = item.Idhd })
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

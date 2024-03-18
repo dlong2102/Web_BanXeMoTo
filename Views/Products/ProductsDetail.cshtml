@@ -1,0 +1,147 @@
+﻿@model Web_BanXeMoTo.Controllers.ViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Thông tin xe " + Model.mauXe.TenXe;
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+<!--about-us start -->
+<section id="home" class="about-us productDetail__banner">
+</section><!--/.about-us-->
+<!--about-us end -->
+
+<section class="about__imgPrice">
+    <div class="container imgPrice__container">
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="about__img">
+                    <img src="@("/img/" + Model.mauXe.HinhAnh1)" alt="package-place" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="about__price">
+
+                    @foreach (var hang in Model.ListHang)
+                    {
+                        if (Model.mauXe.Idhang == hang.Idhang)
+                        {
+                            <h1 class="text-danger about__name line"> @Html.DisplayFor(model => hang.TenHang)<br /> @Html.DisplayFor(model => Model.mauXe.TenXe)</h1>
+                        }
+                    }
+                    @foreach (var km in Model.ListKhuyenMai)
+                    {
+                        if (km.Idkm == Model.mauXe.Idkm)
+                        {
+                            <h2>Khuyến mãi: </h2>
+                            <span>@km.GiaTri %</span>
+                            <h2>Giá bán chỉ từ: </h2>
+                            @*<span>@((int)mau.GiaBan)</span>*@
+                <span>@string.Format("{0:N0}", ((int)Model.mauXe.GiaBan) - ((int)Model.mauXe.GiaBan * ((km.GiaTri) % 100))) VNĐ</span>
+                        }
+                    }
+
+                    <a href="@Url.Action("Create", "Booking")"><button class="book-btn">Đặt lịch</button></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about__detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="about__detailDesc">
+                    <h1>Đặc điểm: </h1>
+                    <p>
+                        @Html.DisplayFor(model => Model.mauXe.MoTa)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="about__moreImg">
+    <div class="container">
+        <h3>Các hình ảnh và màu sắc khác của xe: </h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="about__img">
+                    <img src="@("/img/" + Model.mauXe.HinhAnh2)" alt="package-place" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="about__img">
+                    <img src="@("/img/" + Model.mauXe.HinhAnh3)" alt="package-place" />
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="about__moreImgPrice">
+
+                    <h1>Giá bán lẻ đề xuất: </h1>
+                    <span class="text-danger">@string.Format("{0:N0}", ((int)Model.mauXe.GiaBan)) VNĐ</span>
+
+
+                    <a href="@Url.Action("Create", "Booking")"><button class="book-btn">Đặt lịch</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="danhGia">
+    <div class="container-fluid">
+        <h3>ĐÁNH GIÁ SẢN PHẨM</h3>
+        <div class="danhGia__content">
+            @foreach (var chiTietDg in Model.ListChiTietDg)
+            {
+                @foreach (var kh in Model.ListKhachHang)
+                {
+                    @if (chiTietDg.Idkh == kh.Idkh && chiTietDg.Idmau == Model.mauXe.Idmau)
+                    {
+                        <div class="danhGia__cus">
+                            <div class="row">
+                                <div class="col-md-1 text-center">
+                                    <img src="@("/img/" + kh.Avatar)" width="50" height="50" />
+                                </div>
+                                <div class="col-md-11">
+                                    <h4>@kh.TenKh</h4>
+                                    <p>@chiTietDg.NoiDungDg</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+            }
+
+        </div>
+        <h3>Viết đánh giá</h3>
+        
+        <div class="vietDanhGia">
+            <form asp-action="ProductsDetail" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input asp-for="chiTietDg.Idmau" value="@Model.mauXe.Idmau" hidden />
+                <div class="form-group">
+                    <textarea class="form-control" asp-for="chiTietDg.NoiDungDg" placeholder="Đây là đánh giá của khách hàng" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Gửi đánh giá" class="btn book-btn" />
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+

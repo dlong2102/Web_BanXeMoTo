@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+@model Web_BanXeMoTo.Controllers.ViewModel
+
+@using X.PagedList.Mvc.Core;
+@using Microsoft.AspNetCore.Mvc;
+<link href="~/css/style.css" rel="stylesheet">
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    Quản lý khách hàng
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link active ">
+                <span>Danh sách khách hàng</span>
+            </a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    @using (Html.BeginForm("Index", "KhachHang", FormMethod.Get, new { @style = "float: right; width: 40%" }))
+                    {
+                        <input type="text" id="searchString" name="searchString" placeholder="Find by id or name">
+                        <input type="submit" value="Search" class="btn btn-outline-info" style="margin-bottom:5px" />
+                    }
+                    <br />
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label class="control-label">@Html.ActionLink("ID Khách hàng", "Index", new { sortOrder = ViewBag.NameSortParm })</label>
+                                </th>
+
+                                <th>
+                                    <label asp-for="khachHang.TenKh" class="control-label"></label>
+                                </th>
+
+                                <th>
+                                    <label asp-for="khachHang.DienThoai" class="control-label"></label>
+                                </th>
+
+                                <th>
+                                    <label asp-for="khachHang.DiaChi" class="control-label"></label>
+                                </th>
+                                <th class="text-center">
+                                    <label asp-for="khachHang.Email" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label class="control-label">Hình</label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var khachhang in Model.ListKhachHangs)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(khachHang => khachhang.Idkh)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(khachHang => khachhang.TenKh)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(khachHang => khachhang.DienThoai)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(khachHang => khachhang.DiaChi)
+                                    </td>
+                                    <td>
+                                        @khachhang.Email
+                                    </td>
+                                    <td>
+                                        <img src="@("/img/"+khachhang.Avatar)" width="120" height="90" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    @Html.PagedListPager(Model.ListKhachHangs, page => Url.Action("Index",
+                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

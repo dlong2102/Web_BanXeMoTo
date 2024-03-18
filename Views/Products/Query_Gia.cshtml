@@ -1,0 +1,85 @@
+﻿@model Web_BanXeMoTo.Controllers.ViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Query_Gia";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+<!--about-us start -->
+<section id="home" class="about-us">
+    <div class="container">
+        <div class="about-us-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="single-about-us">
+                        <div class="about-us-txt">
+                            <h2>If passion is the path to success, persistence is your motorcycle</h2>
+                        </div><!--/.about-us-txt-->
+                    </div><!--/.single-about-us-->
+                </div><!--/.col-->
+                <div class="col-sm-0">
+                    <div class="single-about-us">
+
+                    </div><!--/.single-about-us-->
+                </div><!--/.col-->
+            </div><!--/.row-->
+        </div><!--/.about-us-content-->
+    </div><!--/.container-->
+
+</section><!--/.about-us-->
+<!--about-us end -->
+@using (Html.BeginForm("Query_Gia", "Products"))
+{
+    @*<input type="text" name="mt" />
+        <input type="submit" name="Tìm" />*@
+
+    <div class="container">
+
+        <div id="searchPriceTools">
+            <text>Giá Từ</text>
+            <input type="number" name="min" />
+            <text>Đến</text>
+            <input type="number" name="max" />
+            <input class="btn btn-success" type="submit" value="Tìm kiếm" />
+        </div>
+
+        <table class="table">
+
+            @foreach (var mau in Model.ListMauXe)
+            {
+                <div class="col-md-4 col-sm-6">
+                    <div class="single-package-item">
+                        <i><a asp-action="ProductsDetail" asp-route-id="@mau.Idmau"><img src="@("/img/" + mau.HinhAnh1)" alt="package-place" /></a></i>
+                        <div class="single-package-item-txt">
+                            <h3>@Html.DisplayFor(model => mau.TenXe)<br /><span class="pull-right">@string.Format("{0:N0}", ((int)mau.GiaBan)) VNĐ</span></h3>
+                            <div class="packages-para">
+                                <p>
+                                    <span>
+                                        <i class="fa fa-angle-right"><a asp-action="ProductsDetail" asp-route-id="@mau.Idmau">Thông số sản phẩm</a></i>
+                                    </span>
+                                </p>
+                            </div><!--/.packages-para-->
+                            <div class="packages-review">
+                                <p>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <span>254 reviews</span>
+                                </p>
+                            </div><!--/.packages-review-->
+                            <div class="about-btn">
+                                <a href="@Url.Action("Create", "Booking")"><button class="book-btn">Đặt lịch</button></a>
+                            </div><!--/.about-btn-->
+                        </div><!--/.single-package-item-txt-->
+                    </div><!--/.single-package-item-->
+                </div><!--/.col-->
+
+            }
+
+        </table>
+    </div>
+
+}

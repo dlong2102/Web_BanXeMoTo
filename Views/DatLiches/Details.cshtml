@@ -1,0 +1,50 @@
+﻿@model Web_BanXeMoTo.Models.DatLich
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>DatLich</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayDat)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NgayDat)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.XacNhan)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.XacNhan)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdkhNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdkhNavigation.Idkh)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdmauNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdmauNavigation.Idmau)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GhiChu)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GhiChu)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IddatLich">Edit</a> |
+    <a asp-action="Delete" asp-controller="DatLiches" asp-route-id="@Model.IddatLich" method="post">Delete</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

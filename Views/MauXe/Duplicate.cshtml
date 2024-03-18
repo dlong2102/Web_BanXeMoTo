@@ -1,0 +1,139 @@
+﻿@model Web_BanXeMoTo.Controllers.ViewModel
+
+@{ ViewData["Title"] = "Duplicate";
+                Layout = "~/Views/Shared/_LayoutManager.cshtml"; }
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý Mẫu xe
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link">
+                <span>Mẫu xe</span>
+            </a>
+        </li>
+
+    </ul>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <div>
+
+                        @*<form asp-action="Duplicate" enctype="multipart/form-data">
+            <partial name="_ListDetails" model="Model" />
+            <hr />
+            <input type="submit" asp-route-id="@Model.mauXe.Idmau" value="Nhân bản" class="btn btn-sm btn-danger" /> |
+            <a asp-action="Index" class="btn btn-sm btn-outline-secondary">Trở về</a>
+        </form>*@
+
+                        <form asp-action="Duplicate" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="mauXe.Idmau" class="control-label"></label>
+                                <input asp-for="mauXe.Idmau" class="form-control" readonly />
+                                <span asp-validation-for="mauXe.Idmau" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="mauXe.TenXe" class="control-label"></label>
+                                <input asp-for="mauXe.TenXe" class="form-control"readonly />
+                                <span asp-validation-for="mauXe.TenXe" class="text-danger"></span>
+                            </div>
+                            <div class="position-relative form-group">
+                                <label asp-for="mauXe.Idkm" class="control-label"></label>
+                                @*<input asp-for="mauXe.IdkmNavigation.GiaTri" class="form-control" readonly />*@
+                                <select asp-for="mauXe.Idkm" class="form-control"readonly>
+                                @foreach (var item in Model.ListKhuyenMai)
+                                {
+                                    if (item.Idkm == Model.mauXe.Idkm)
+                                    {
+                                        <option value="@item.Idkm">@item.GiaTri </option>}
+                                }
+
+                                </select>
+                            </div>
+                            <div class="position-relative form-group">
+                                <label asp-for="mauXe.Idhang" class="control-label"></label>
+                                @*@foreach(var item in Model.ListHang)
+            {
+                if (item.Idhang == Model.mauXe.Idhang)
+                {
+                    <input asp-for="hang.TenHang"class="form-control" readonly/>
+                }
+            }*@
+                                <input asp-for="mauXe.Idhang"class="form-control" readonly/>
+                                @*<select asp-for="mauXe.Idhang" class="form-control"readonly>
+                                    @foreach (var item in Model.ListHang)
+                                    {
+                        <option value="@item.Idhang">@item.TenHang</option>}
+                                </select>*@
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="mauXe.GiaBan" class="control-label"></label>
+                                <input asp-for="mauXe.GiaBan" class="form-control"readonly />
+                                <span asp-validation-for="mauXe.GiaBan" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="mauXe.BaoHanh" class="control-label"></label>
+                                <input asp-for="mauXe.BaoHanh" class="form-control"readonly />
+                                <span asp-validation-for="mauXe.BaoHanh" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="mauXe.TrangThai" class="control-label"></label>
+                                <input asp-for="mauXe.TrangThai"class="form-control"readonly/>  
+                                <span asp-validation-for="mauXe.TrangThai" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="mauXe.MoTa" class="control-label"></label>
+                                <input asp-for="mauXe.MoTa" class="form-control" readonly/>
+                                <span asp-validation-for="mauXe.MoTa" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="mauXe.HinhAnh1" class="control-label"></label>
+                                @*<input asp-for="mauXe.UploadHinh1" accept="image/*"hidden />*@
+                                @if (Model.mauXe != null)
+                                {<input asp-for="mauXe.HinhAnh1" class="control-label" readonly/>
+                        <img src="@("/img/"+Model.mauXe.HinhAnh1)" asp-append-version="true" width="120" height="90" />}
+                                @*<span asp-validation-for="mauXe.UploadHinh1" class="text-danger" hidden></span>*@
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="mauXe.HinhAnh2" class="control-label"></label>
+                                @*<input asp-for="mauXe.UploadHinh2" accept="image/*"readonly />*@
+                                @if (Model.mauXe != null)
+                                {<input asp-for="mauXe.HinhAnh2" class="control-label" readonly />
+                        <img src="@("/img/"+Model.mauXe.HinhAnh2)" asp-append-version="true" width="120" height="90" />}
+                                @*<span asp-validation-for="mauXe.UploadHinh2" class="text-danger" hidden></span>*@
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="mauXe.HinhAnh3" class="control-label"></label>
+                                @*<input asp-for="mauXe.UploadHinh3" accept="image/*"readonly/>*@
+                                @if (Model.mauXe != null)
+                                {<input asp-for="mauXe.HinhAnh3" class="control-label" readonly />
+                        <img src="@("/img/"+Model.mauXe.HinhAnh3)" asp-append-version="true" width="120" height="90" />}
+                                @*<span asp-validation-for="mauXe.UploadHinh3" class="text-danger" hidden></span>*@
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Nhân bản"asp-route-id="@Model.mauXe.Idmau" class="btn btn-sm btn-outline-primary" />
+                                <a asp-action="Index" class="btn btn-sm btn-outline-secondary">Trở về</a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,239 @@
+﻿@model Web_BanXeMoTo.Controllers.ViewModelKH
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
+
+<!--about-us start -->
+<section id="home" class="about-us">
+    <div class="container">
+        <div class="about-us-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="single-about-us">
+                        <div class="about-us-txt">
+                            <h2>
+                                If I fail, I try again and again, and again.
+
+                            </h2>
+                        </div><!--/.about-us-txt-->
+                    </div><!--/.single-about-us-->
+                </div><!--/.col-->
+                <div class="col-sm-0">
+                    <div class="single-about-us">
+
+                    </div><!--/.single-about-us-->
+                </div><!--/.col-->
+            </div><!--/.row-->
+        </div><!--/.about-us-content-->
+    </div><!--/.container-->
+
+</section><!--/.about-us-->
+<!--about-us end -->
+<!--galley start-->
+<section id="gallery" class="gallery">
+    <div class="container">
+        <div class="gallery-details">
+            <div class="gallary-header text-center">
+                <h2>
+                    Tổng hợp các hãng xe
+                </h2>
+            </div><!--/.gallery-header-->
+            <div class="about-btn">
+                <a href="@Url.Action("Query_Gia", "Products", null, null,null,"searchPriceTools")"><button class="about-view packages-btn">Tìm theo giá</button></a>
+            </div><!--/.about-btn-->
+            <div class="gallery-box">
+                <div class="gallery-content">
+                    <div class="filtr-container">
+                        <div class="row">
+                            @foreach (var hang in Model.ListHang)
+                            {
+                                @foreach (var mau in Model.ListMauXe)
+                                {
+                                    if (mau.Idhang == hang.Idhang)
+                                    {
+                                        <div class="col-md-4">
+                                            <div class="filtr-item">
+                                                <img src="@("/img/"+mau.HinhAnh1)" alt="package-place" />
+                                                <div class="item-title">
+                                                    <a asp-action="Query_Hang" asp-route-id="@mau.Idhang">
+                                                        <h3>@Html.DisplayFor(model => hang.TenHang)<br /></h3>
+                                                    </a>
+                                                </div><!-- /.item-title -->
+                                            </div><!-- /.filtr-item -->
+                                        </div> <!-- /.col -->
+                                        break;
+                                    }
+                                }
+                            }
+                            <div class="col-md-8">
+                                <div class="filtr-item">
+                                    <img src="~/img/Background/ProductDetailBG02.png" />
+                                </div>
+                            </div>
+                        </div><!-- /.row -->
+
+                    </div><!-- /.filtr-container-->
+                </div><!-- /.gallery-content -->
+            </div><!--/.galley-box-->
+        </div><!--/.gallery-details-->
+    </div><!--/.container-->
+
+</section><!--/.gallery-->
+<!--gallery end-->
+<!--discount-offer start-->
+<section class="discount-offer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="dicount-offer-content text-center">
+                    <h2>Ưu đãi lên đến 20%</h2>
+                    <div class="campaign-timer">
+                        <p>
+                            Khi đặt lịch đến showroom trải nghiệm sản phẩm và tư vấn trực tiếp.
+                        </p>
+                    </div><!--/.campaign-timer-->
+                </div>
+                <!-- /.dicount-offer-content-->
+            </div><!-- /.col-->
+        </div><!-- /.row-->
+    </div><!-- /.container-->
+
+</section><!-- /.discount-offer-->
+<!--discount-offer end-->
+<!--packages start-->
+<section id="pack" class="packages">
+    <div class="container">
+        <div class="gallary-header text-center">
+            <h2>
+                Sản phẩm nổi bật
+            </h2>
+        </div><!--/.gallery-header-->
+        <div class="packages-content">
+            <div class="row">
+
+                @*@foreach (var hang in Model.ListHang)
+                    {
+                        <br />
+                        <tr>
+                            <td>
+                                <div class="gallary-header text-center">
+                                    <h2>
+                                        @Html.DisplayFor(model => hang.TenHang)
+                                    </h2>
+                                </div>/.gallery-header
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>*@
+                        @foreach (var hang in Model.ListHang)
+                            {
+                                @foreach (var mau in Model.ListMauXe)
+                                {
+                                    if (mau.Idhang == hang.Idhang)
+                                    {
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="single-package-item">
+                                                <i><a asp-action="ProductsDetail" asp-route-id="@mau.Idmau"><img src="@("/img/"+mau.HinhAnh1)" alt="package-place" /></a></i>
+                                                <div class="single-package-item-txt">
+                                                    <h3>@Html.DisplayFor(model => mau.TenXe)<br /><span class="pull-right">@string.Format("{0:N0}", ((int)mau.GiaBan)) VNĐ</span></h3>
+                                                    <div class="packages-para">
+                                                        <p>
+                                                            <span>
+                                                                <i class="fa fa-angle-right"><a asp-action="ProductsDetail" asp-route-id="@mau.Idmau">Thông số sản phẩm</a></i>
+                                                            </span>
+                                                        </p>
+                                                    </div><!--/.packages-para-->
+                                                    <div class="packages-review">
+                                                        <p>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <span>254 reviews</span>
+                                                        </p>
+                                                    </div><!--/.packages-review-->
+                                                    <div class="about-btn">
+                                                        <a href="@Url.Action("Create", "Booking")">
+                                                            <button class="about-view packages-btn">
+                                                                Đặt lịch ngay
+                                                            </button>
+                                                        </a>
+                                                    </div><!--/.about-btn-->
+                                                </div><!--/.single-package-item-txt-->
+                                            </div><!--/.single-package-item-->
+                                        </div><!--/.col-->
+                                        break;
+                                    }
+                                }
+                            }
+            <div class="col-md-4 col-sm-6">
+                <div class="single-package-item" style="padding-bottom:0; overflow:hidden">
+                    <a class="fullBtn" href="@Url.Action("Query_Gia", "Products", null, null,null,"searchPriceTools")">Xem tất cả sản phẩm</a>
+                    <div class="fullBtn__overlay"></div>
+                </div>
+            </div>
+
+
+                @*</td>
+            </tr>
+        }*@
+
+
+            </div><!--/.row-->
+        </div><!--/.packages-content-->
+    </div><!--/.container-->
+
+</section><!--/.packages-->
+<!--packages end-->
+<!--special-offer start-->
+<section id="spo" class="special-offer">
+    <div class="container">
+        <div class="special-offer-content">
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="single-special-offer">
+                        <div class="single-special-offer-txt">
+                            <h2 class="text-danger" style="color: red">Ninja H2</h2>
+                            <div class="packages-review special-offer-review">
+                                <p>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </p>
+                            </div><!--/.packages-review-->
+                            <div class="offer-btn-group">
+                                <div class="about-btn">
+                                    <a href="@Url.Action("Create", "Booking")">
+                                        <button class="about-view packages-btn">
+                                            Đặt lịch ngay
+                                        </button>
+                                    </a>
+                                </div><!--/.about-btn-->
+                            </div><!--/.offer-btn-group-->
+                        </div><!--/.single-special-offer-txt-->
+                    </div><!--/.single-special-offer-->
+                </div><!--/.col-->
+                <div class="col-sm-5">
+                    <div class="single-special-offer">
+                        <div class="single-special-offer-bg">
+                            <img src="~/assets/images/offer/offer-shape.png" alt="offer-shape">
+                        </div><!--/.single-special-offer-bg-->
+                        <div class="single-special-shape-txt">
+                            <h3>Ưu đãi sốc</h3>
+                            <h4><span>lên đến 10%</span></h4>
+                            <p><span>899.000.000 VNĐ</span><br>giá gốc: 910.000.000</p>
+                        </div><!--/.single-special-shape-txt-->
+                    </div><!--/.single-special-offer-->
+                </div><!--/.col-->
+            </div><!--/.row-->
+        </div><!--/.special-offer-content-->
+    </div><!--/.container-->
+
+</section><!--/.special-offer end-->
+<!--special-offer end-->

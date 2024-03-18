@@ -1,0 +1,145 @@
+﻿@{ ViewData["Tittle"] = "Danh sách mẫu xe";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml"; }
+
+@model Web_BanXeMoTo.Controllers.ViewModel
+@using X.PagedList.Mvc.Core;
+@using Microsoft.AspNetCore.Mvc;
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý Mẫu xe
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link active ">
+                <span>Mẫu xe</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link ">
+                <span>Thêm mẫu xe</span>
+            </a>
+
+
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    @using (Html.BeginForm("Index", "MauXe", FormMethod.Get, new { @style = "float: right; width: 40%" }))
+                    {
+                        <input type="text" id="searchString" name="searchString" placeholder="Find by id or name">
+                        <input type="submit" value="Search" class="btn btn-outline-info" style="margin-bottom:5px" />
+                    }
+                    <br />
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label class="control-label">@Html.ActionLink("ID Mẫu", "Index", new { sortOrder = ViewBag.NameSortParm })</label>
+                                </th>
+                                <th>
+                                    <label class="control-label">Hình</label>
+                                </th>
+                                <th>
+                                    <label asp-for="mauXe.TenXe" class="control-label"></label>
+                                </th>
+
+                                <th>
+                                    <label asp-for="hang.TenHang" class="control-label"></label>
+                                </th>
+
+                                <th>
+                                    <label asp-for="mauXe.GiaBan" class="control-label"></label>
+                                </th>
+                                <th class="text-center">
+                                    <label asp-for="mauXe.BaoHanh" class="control-label"></label>
+                                </th>
+                                <th class="text-center">
+                                    <label class="control-label">Khuyến mãi</label>
+                                </th>
+                                <th class="text-center">
+                                    <label class="control-label">Số lượng</label>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ListMauXes)
+                            {
+                <tr>
+                    <td>
+                        @item.Idmau
+                    </td>
+                    <td>
+                        <img src="@("/img/"+item.HinhAnh1)" width="120" height="90" />
+                    </td>
+                    <td>
+                        @item.TenXe
+                    </td>
+                    <td>
+                        @foreach (var hang in Model.ListHang)
+                        {
+                            if (hang.Idhang == item.Idhang)
+                            {
+                                @hang.TenHang
+                                break;
+                            }
+                        }
+                    </td>
+
+                    <td>
+                        @((int)@item.GiaBan) VNĐ
+                    </td>
+                    <td class="text-center">
+                        @item.BaoHanh
+                    </td>
+                    <td class="text-center">
+                        @foreach (var khuyenmai in Model.ListKhuyenMai)
+                        {
+                            if (khuyenmai.Idkm == item.Idkm)
+                            {
+        @khuyenmai.GiaTri break;
+    }
+}%
+                    </td>
+                    <td class="text-center">
+                        @{ int amount = 0;
+                            @foreach (var mauxe in Model.ListXe)
+                            {
+                                if (mauxe.Idmau == item.Idmau)
+                                {
+                                    amount++;
+                                }
+                            }
+                                            @amount }
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-info">Chi tiết</a>
+                        <a asp-action="Delete" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-danger" hidden>Xóa</a>
+                        <a asp-action="Edit" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-warning">Sửa</a>
+                        <a asp-action="Duplicate" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-warning">Nhân bản</a>
+                    </td>
+                </tr>
+}
+                        </tbody>
+                    </table>
+
+                    @Html.PagedListPager(Model.ListMauXes, page => Url.Action("Index",
+                                                      new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

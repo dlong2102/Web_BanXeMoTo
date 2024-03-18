@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Web_BanXeMoTo.Models.DatLich>
+
+@{
+    ViewData["Title"] = "Danh sách chờ xác nhận";
+    Layout = "~/Views/Shared/_Layoutmanager.cshtml";
+}
+
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý Đặt lịch
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link ">
+                <span>Danh sách Lịch đã đặt</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link">
+                <span>Tạo hóa đơn</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="DanhSachHomNay" class="nav-link ">
+                <span>Danh sách Lịch đã đặt hôm nay</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="DanhSachChoXacNhan" class="nav-link active">
+                <span>Danh sách chờ xác nhận</span>
+            </a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.NgayDat)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.XacNhan)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdkhNavigation)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdmauNavigation)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.GhiChu)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NgayDat)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.XacNhan)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdkhNavigation.Idkh)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdmauNavigation.Idmau)
+                                    </td>
+                                    <td>
+                                        @if (item.GhiChu != null)
+                                        {
+                                            @Html.DisplayFor(modelItem => item.GhiChu)}
+                                        else
+                                        { @Html.Display("")}
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.IddatLich" class="btn btn-sm btn-outline-info">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.IddatLich" class="btn btn-sm btn-outline-info">Details</a> |
+                                        @*<a asp-action="Delete" asp-route-id="@item.IddatLich" class="btn btn-sm btn-outline-danger">Delete</a>*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

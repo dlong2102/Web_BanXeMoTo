@@ -1,0 +1,137 @@
+﻿@{ ViewData["Title"] = "Danh sách nhân viên";
+                Layout = "~/Views/Shared/_LayoutManager.cshtml"; }
+@model Web_BanXeMoTo.Controllers.ViewModelNV
+@using X.PagedList.Mvc.Core;
+@using Microsoft.AspNetCore.Mvc;
+
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý nhân viên
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link active ">
+                <span>Danh sách nhân viên</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link ">
+                <span>Thêm nhân viên </span>
+            </a>
+
+
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    @using (Html.BeginForm("Index", "NhanVien", FormMethod.Get, new { @style = "float: right; width: 40%" }))
+                    {
+        <input type="text" id="searchString" name="searchString" placeholder="Find by name">
+                        <input type="submit" value="Search" class="btn btn-outline-info" style="margin-bottom:5px" />}
+                    <br />
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label class="control-label">@Html.ActionLink("ID NV", "Index", new { sortOrder = ViewBag.NameSortParm })</label>
+                                </th>
+                                <th>
+                                    <label asp-for="nhanVien.Idnv" class="control-label"></label>
+                                </th>
+
+                                <th>
+                                    <label asp-for="nhanVien.TenNv" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="nhanVien.DienThoai" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="nhanVien.DiaChi" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="nhanVien.Cmnd" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="nhanVien.Email" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="nhanVien.Idtype" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label class="control-label">Hình</label>
+                                </th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var nhanvien in Model.ListNhanViens)
+                            {
+                <tr>
+                    <td>
+                        @nhanvien.Idnv
+                    </td>
+                    <td>
+                        @nhanvien.TenNv
+                    </td>
+                    <td>
+                        @nhanvien.DienThoai
+                    </td>
+                    <td>
+                        @nhanvien.DiaChi
+                    </td>
+                    <td>
+                        @nhanvien.Cmnd
+                    </td>
+
+                    <td>
+                        @nhanvien.Email
+                    </td>
+                    <td>
+                        @foreach (var nv in Model.ListType)
+                        {
+                            if (nv.Idtype == nhanvien.Idtype)
+                            {
+                                @nv.Name
+                                break;
+                            }
+                        }
+                    </td>
+
+                    @*<td>
+                            <img src="@("~/img/" + @item.HinhAnh1)" asp-append-version="true" width="120" height="90" />
+                        </td>*@
+                    <td>
+                        <img src="@("/img/"+nhanvien.Avatar)" width="80" height="80" style="border-radius:50%" />
+                    </td>
+
+                    <td>
+                        <a asp-action="Detail" asp-route-id="@nhanvien.Idnv" class="btn btn-sm btn-outline-info">Chi tiết</a>
+                        <a asp-action="Edit" asp-route-id="@nhanvien.Idnv" class="btn btn-sm btn-outline-warning">Sửa</a>
+                        @*<a asp-action="Delete" asp-route-id="@nhanvien.Idnv" class="btn btn-sm btn-outline-danger">Xóa</a>*@
+                    </td>
+                </tr>}
+                        </tbody>
+                    </table>
+
+                    @Html.PagedListPager(Model.ListNhanViens, page => Url.Action("Index",
+                                                               new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

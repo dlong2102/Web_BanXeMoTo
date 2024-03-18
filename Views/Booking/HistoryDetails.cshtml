@@ -1,0 +1,82 @@
+﻿@model Web_BanXeMoTo.Controllers.HoaDonViewModel
+@using Microsoft.AspNetCore.Http;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "History";
+                Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
+<!--about-us start -->
+<section id="home" class="about-us">
+    <div class="container">
+        <div class="about-us-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="single-about-us">
+                        <div class="about-us-txt">
+                            <h2>If passion is the path to success, persistence is your motorcycle</h2>
+                        </div><!--/.about-us-txt-->
+                    </div><!--/.single-about-us-->
+                </div><!--/.col-->
+                <div class="col-sm-0">
+                    <div class="single-about-us">
+
+                    </div><!--/.single-about-us-->
+                </div><!--/.col-->
+            </div><!--/.row-->
+        </div><!--/.about-us-content-->
+    </div><!--/.container-->
+
+</section><!--/.about-us-->
+<!--about-us end -->
+
+<style>
+    .layer {
+        margin: 50px 0;
+        border: 5px solid #00ffff;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="container">
+    <div class="layer">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ChiTietHd.Idxe)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ChiTietHd.KhuyenMai)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ChiTietHd.GiaBan)
+                    </th>
+                    <th>
+                        Thành tiền
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListChiTietHd)
+                {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Idxe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhuyenMai)
+        </td>
+        <td>
+            @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ
+        </td>
+        <td>
+            @string.Format("{0:N0}", ((item.KhuyenMai == 0 ? ((double)item.GiaBan) : (((double)item.GiaBan) - ((double)item.GiaBan) * (double)item.KhuyenMai / 100)))) VNĐ
+        </td>
+    </tr>}
+
+            </tbody>
+        </table>
+
+        </div>
+</div>

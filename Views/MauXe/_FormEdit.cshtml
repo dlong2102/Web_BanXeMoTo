@@ -1,0 +1,78 @@
+﻿@model Web_BanXeMoTo.Controllers.ViewModel
+
+
+
+<div class="form-group">
+    <label asp-for="mauXe.TenXe" class="control-label"></label>
+    <input asp-for="mauXe.TenXe" class="form-control" />
+    <span asp-validation-for="mauXe.TenXe" class="text-danger"></span>
+</div>
+<div class="position-relative form-group">
+    <label asp-for="mauXe.Idkm" class="control-label"></label>
+    <select asp-for="mauXe.Idkm" class="form-control">
+        @foreach (var item in Model.ListKhuyenMai)
+        {
+            <option value="@item.Idkm">@item.GiaTri </option>
+        }
+    </select>
+</div>
+<div class="position-relative form-group">
+    <label asp-for="mauXe.Idhang" class="control-label"></label>
+    <select asp-for="mauXe.Idhang" class="form-control">
+        @foreach (var item in Model.ListHang)
+        {
+            <option value="@item.Idhang">@item.TenHang</option>
+        }
+    </select>
+</div>
+
+<div class="form-group">
+    <label asp-for="mauXe.GiaBan" class="control-label"></label>
+    <input asp-for="mauXe.GiaBan" class="form-control" />
+    <span asp-validation-for="mauXe.GiaBan" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="mauXe.BaoHanh" class="control-label"></label>
+    <input asp-for="mauXe.BaoHanh" class="form-control" />
+    <span asp-validation-for="mauXe.BaoHanh" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="mauXe.TrangThai" class="control-label"></label>
+    <select asp-for="mauXe.TrangThai" class="form-control">
+        <option value="true">Đang kinh doanh</option>
+        <option value="false">Ngừng kinh doanh</option>
+    </select>    <span asp-validation-for="mauXe.TrangThai" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="mauXe.MoTa" class="control-label"></label>
+    <input asp-for="mauXe.MoTa" class="form-control" />
+    <span asp-validation-for="mauXe.MoTa" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="mauXe.UploadHinh1" class="control-label"></label>
+    <input asp-for="mauXe.UploadHinh1" accept="image/*" />
+    @if (Model.mauXe != null)
+    {
+        <img src="@("/img/"+Model.mauXe.HinhAnh1)" asp-append-version="true" width="120" height="90" />
+    }
+    <span asp-validation-for="mauXe.UploadHinh1" class="text-danger" hidden></span>
+</div>
+<div class="form-group">
+    <label asp-for="mauXe.UploadHinh2" class="control-label"></label>
+    <input asp-for="mauXe.UploadHinh2" accept="image/*" />
+    @if (Model.mauXe != null)
+    {
+        <img src="@("/img/"+Model.mauXe.HinhAnh2)" asp-append-version="true" width="120" height="90" />
+    }
+    <span asp-validation-for="mauXe.UploadHinh2" class="text-danger" hidden></span>
+</div>
+<div class="form-group">
+    <label asp-for="mauXe.UploadHinh3" class="control-label"></label>
+    <input asp-for="mauXe.UploadHinh3" accept="image/*" />
+    @if (Model.mauXe != null)
+    {
+        <img src="@("/img/"+Model.mauXe.HinhAnh3)" asp-append-version="true" width="120" height="90" />
+    }
+    <span asp-validation-for="mauXe.UploadHinh3" class="text-danger" hidden></span>
+</div>

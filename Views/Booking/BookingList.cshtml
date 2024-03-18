@@ -1,0 +1,110 @@
+﻿@model Web_BanXeMoTo.Controllers.ViewModelCus
+@using Microsoft.AspNetCore.Http;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "BookingList";
+                Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
+<!--about-us start -->
+<section id="home" class="about-us">
+    <div class="container">
+        <div class="about-us-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="single-about-us">
+                        <div class="about-us-txt">
+                            <h2>If passion is the path to success, persistence is your motorcycle</h2>
+                        </div><!--/.about-us-txt-->
+                    </div><!--/.single-about-us-->
+                </div><!--/.col-->
+                <div class="col-sm-0">
+                    <div class="single-about-us">
+
+                    </div><!--/.single-about-us-->
+                </div><!--/.col-->
+            </div><!--/.row-->
+        </div><!--/.about-us-content-->
+    </div><!--/.container-->
+
+</section><!--/.about-us-->
+<!--about-us end -->
+
+<style>
+    .layer {
+        margin: 50px 0;
+        border: 5px solid #00ffff;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="container">
+    <div class="layer">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.datLich.NgayDat)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.datLich.XacNhan)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.datLich.Idkh)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.mauXe.TenXe)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.datLich.GhiChu)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var kh in Model.ListKhachHang)
+                {
+                    if (Context.Session.GetString("email") == kh.Email)
+                    {
+    @foreach (var dl in Model.ListDatLich)
+    {
+        if (dl.Idkh == kh.Idkh)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => dl.NgayDat)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => dl.XacNhan)
+    </td>
+    @*<td >
+            @Html.DisplayFor(modelItem => dl.Idkh)
+        </td>*@
+    <td>
+        @foreach (var mau in Model.ListMauXe)
+        {
+            if (dl.Idmau == mau.Idmau)
+            {
+@Html.DisplayFor(modelItem => mau.TenXe)}
+                            }
+
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => dl.GhiChu)
+    </td>
+    <td>
+        @if (dl.XacNhan != true)
+        {
+<a asp-action="Edit" asp-route-id="@dl.IddatLich">Cập nhật </a> <span> |</span> } @*<a asp-action="Details" asp-route-id="@dl.IddatLich">Details</a> |*@
+        <a asp-action="Delete" asp-route-id="@dl.IddatLich">Hủy lịch hẹn</a>
+    </td>
+
+</tr>}
+
+                    }}
+                }
+
+            </tbody>
+        </table>
+
+        </div>
+</div>

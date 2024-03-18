@@ -1,0 +1,51 @@
+﻿@model Web_BanXeMoTo.Models.DatLich
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>DatLich</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IddatLich" />
+            <div class="form-group">
+                <label asp-for="Idmau" class="control-label"></label>
+                <select asp-for="Idmau" class="form-control" asp-items="ViewBag.Idmau" readonly></select>
+                <span asp-validation-for="Idmau" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idkh" class="control-label"></label>
+                <select asp-for="Idkh" class="form-control" asp-items="ViewBag.Idkh" readonly></select>
+                <span asp-validation-for="Idkh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgayDat" class="control-label"></label>
+                <input asp-for="NgayDat" class="form-control" readonly />
+                <span asp-validation-for="NgayDat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GhiChu" class="control-label"></label>
+                <input asp-for="GhiChu" class="form-control" readonly />                
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="XacNhan" /> @Html.DisplayNameFor(model => model.XacNhan)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

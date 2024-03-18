@@ -1,0 +1,44 @@
+﻿@model Web_BanXeMoTo.Controllers.ViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý Mẫu xe
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link">
+                <span>Mẫu xe</span>
+            </a>
+        </li>
+
+    </ul>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <div>
+                        <partial name="_ListDetails" model="Model" />
+                        <hr/>
+                        <form asp-action="Delete">
+                            <input type="submit" value="Xóa" class="btn btn-sm btn-danger" /> |
+                            <a asp-action="Index" class="btn btn-sm btn-outline-secondary">Trở về</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
