@@ -130,7 +130,7 @@ namespace Web_BanXeMoTo.Controllers
                     _context.Update(datLich);
                     await _context.SaveChangesAsync();
                     if (datLich.XacNhan == true)
-                    { SendEmailConfirm(datLich); }
+                    { await SendEmailConfirm(datLich); }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
