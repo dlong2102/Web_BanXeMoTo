@@ -12,7 +12,7 @@ using X.PagedList;
 
 namespace Web_BanXeMoTo.Controllers
 {
-    [Authorize(Roles = "admin, staff")]
+    [Authorize(Roles = "admin")]
     public class XeController : Controller
     {
 

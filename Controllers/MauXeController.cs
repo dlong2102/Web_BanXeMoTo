@@ -30,17 +30,6 @@ namespace Web_BanXeMoTo.Controllers
             PrintInfomation();
         }
 
-        //public IActionResult Index()
-        //{
-        //    ViewBag.Role = TempData["Role"];
-
-        //    var model = new ViewModel();
-        //    model.ListHang = database.Hangs.ToArray();
-        //    model.ListMauXe = database.MauXes.ToList();
-        //    model.ListKhuyenMai = database.KhuyenMais.ToArray();
-        //    return View(model);
-        //}
-
         public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             //A ViewBag property provides the view with the current sort order, because this must be included in 
@@ -199,7 +188,6 @@ namespace Web_BanXeMoTo.Controllers
             ViewBag.Role = TempData["Role"];
 
             var model = new ViewModel();
-            //model.ListHang = database.Hangs.ToArray();
             model.ListHang = HangSingleton.Instance.listHang.ToArray();
             model.ListMauXe = database.MauXes.ToArray();
             model.ListKhuyenMai = database.KhuyenMais.ToArray();
@@ -211,7 +199,6 @@ namespace Web_BanXeMoTo.Controllers
         public async Task<IActionResult> Edit(string id, MauXe mauXe)
         {
             var model = new ViewModel();
-            //model.ListHang = database.Hangs.ToArray();
             model.ListHang = HangSingleton.Instance.listHang.ToArray();
             model.ListKhuyenMai = database.KhuyenMais.ToArray();
             model.mauXe = database.MauXes.Where(x => x.Idmau == mauXe.Idmau).FirstOrDefault();

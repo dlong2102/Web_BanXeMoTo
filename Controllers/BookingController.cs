@@ -28,7 +28,7 @@ namespace Web_BanXeMoTo.Controllers
             model.ListDatLich = database.DatLiches.ToArray();
             model.ListHang = database.Hangs.ToArray();
             model.ListMauXe = database.MauXes.ToArray();
-            model.ListKhachHang = database.KhachHangs/*.Where(x=>x.Idkh==id)*/.ToArray();
+            model.ListKhachHang = database.KhachHangs.ToArray();
             return View(model);
         }
         public IActionResult Create()
@@ -42,7 +42,6 @@ namespace Web_BanXeMoTo.Controllers
             model.ListMauXe = database.MauXes.ToArray();
             model.ListKhachHang = database.KhachHangs.ToArray();
             return View(model);
-            //return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(DatLich datlich)
@@ -133,14 +132,5 @@ namespace Web_BanXeMoTo.Controllers
             };
             return View(model);
         }
-
-        //public ActionResult SelectMau()
-        //{
-        //    var model = new ViewModel();
-        //    model.ListHang = database.Hangs.ToArray();
-        //    model.ListMauXe = database.MauXes.ToArray();
-        //    return View(model);
-
-        //}
     }
 }
