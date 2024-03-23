@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -29,6 +30,7 @@ namespace Web_BanXeMoTo.Models
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<TypeAcc> TypeAccs { get; set; }
         public virtual DbSet<Xe> Xes { get; set; }
+        public IEnumerable<object> Products { get; internal set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

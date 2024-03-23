@@ -1,0 +1,33 @@
+﻿@using Web_BanXeMoTo.Models
+@model IEnumerable<MauXe>
+
+<h2>Kết quả tìm kiếm</h2>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tên Mẫu Xe</th>
+                <th>Tên Hãng</th>
+                <th>Giá</th>
+                <th>Mô tả</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var xe in Model)
+            {
+                <tr>
+                    <td>@xe.TenXe</td>
+                    <td>@xe.Idhang</td>
+                    <td>@xe.GiaBan</td>
+                    <td>@xe.MoTa</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Không tìm thấy kết quả nào.</p>
+}

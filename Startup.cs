@@ -7,6 +7,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Web_BanXeMoTo.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Web_BanXeMoTo.Decorator;
 
 namespace Web_BanXeMoTo
 {
@@ -26,6 +27,7 @@ namespace Web_BanXeMoTo
             services.AddDbContext<QLMoToContext>(options => options.UseSqlServer("Server=LAPTOP-IGNO6GRG;Database=moto;Trusted_Connection=True;"));
             services.AddMvc();
             services.AddSession();
+            services.AddScoped<ITimKiemProductService, TimKiemProductService>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
              .AddCookie(opt =>
