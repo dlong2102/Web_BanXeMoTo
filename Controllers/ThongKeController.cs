@@ -52,8 +52,6 @@ namespace Web_BanXeMoTo.Controllers
                 {
                     int.TryParse(searchString.Substring(5, 2), out int month);
                     int.TryParse(searchString.Substring(0, 4), out int year);
-                    //int month = searchString.Substring(5, 2);
-                    //int year = searchString.Substring(0, 4);
                     ViewBag.monthyear = month.ToString() + "/" + year.ToString();
 
 
@@ -84,8 +82,6 @@ namespace Web_BanXeMoTo.Controllers
             };
             return View(modelv);
         }
-
-
         public async Task<IActionResult> Details(string ID)
         {
             var model = new HoaDonViewModel

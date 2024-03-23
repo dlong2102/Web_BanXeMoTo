@@ -1,4 +1,6 @@
-﻿@model Web_BanXeMoTo.Controllers.ViewModel
+﻿@using Web_BanXeMoTo.IIterator
+@using Web_BanXeMoTo.Models
+@model Web_BanXeMoTo.Controllers.ViewModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -103,45 +105,54 @@
     <div class="container-fluid">
         <h3>ĐÁNH GIÁ SẢN PHẨM</h3>
         <div class="danhGia__content">
-            @foreach (var chiTietDg in Model.ListChiTietDg)
-            {
-                @foreach (var kh in Model.ListKhachHang)
+            @{
+                foreach (var review in Model.ListChiTietDg)
                 {
-                    @if (chiTietDg.Idkh == kh.Idkh && chiTietDg.Idmau == Model.mauXe.Idmau)
+                    foreach (var kh in Model.ListKhachHang)
                     {
-                        <div class="danhGia__cus">
-                            <div class="row">
-                                <div class="col-md-1 text-center">
-                                    <img src="@("/img/" + kh.Avatar)" width="50" height="50" />
-                                </div>
-                                <div class="col-md-11">
-                                    <h4>@kh.TenKh</h4>
-                                    <p>@chiTietDg.NoiDungDg</p>
+                        if (review.Idkh == kh.Idkh && review.Idmau == Model.mauXe.Idmau)
+                        {
+                            <div class="danhGia__cus">
+                                <div class="row">
+                                    <div class="col-md-1 text-center">
+                                        <img src="@("/img/" + kh.Avatar)" width="50" height="50" />
+                                    </div>
+                                    <div class="col-md-11">
+                                        <h4>@kh.TenKh</h4>
+                                        <p>@review.NoiDungDg</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     }
                 }
-
             }
-
         </div>
         <h3>Viết đánh giá</h3>
-        
         <div class="vietDanhGia">
-            <form asp-action="ProductsDetail" enctype="multipart/form-data">
+            <form asp-action="ProductsDetail" enctype="multipart/form-data" id="reviewForm">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
                 <input asp-for="chiTietDg.Idmau" value="@Model.mauXe.Idmau" hidden />
                 <div class="form-group">
-                    <textarea class="form-control" asp-for="chiTietDg.NoiDungDg" placeholder="Đây là đánh giá của khách hàng" rows="3"></textarea>
+                    <input class="form-control" id="chiTietDg.NoiDungDg" name="chiTietDg.NoiDungDg" placeholder="Đây là đánh giá của khách hàng" rows="3"></input>
                 </div>
-
                 <div class="form-group">
                     <input type="submit" value="Gửi đánh giá" class="btn book-btn" />
                 </div>
             </form>
         </div>
+
+        <script>
+            $(function () {
+                $('#reviewForm').submit(function () {
+                    setTimeout(function () {
+                        $('chiTietDg.NoiDungDg').val('');
+                    }, 100);
+                });
+            });
+        </script>
+
     </div>
 </section>
+
 
