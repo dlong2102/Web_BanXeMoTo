@@ -11,6 +11,21 @@ namespace Web_BanXeMoTo.Models
 {
     public interface MauxePrototype 
     {
+        string TenXe { get; set; }
+        string Idhang { get; set; }
+        string Idkm { get; set; }
+        decimal GiaBan { get; set; }
+        string HinhAnh1 { get; set; }
+        string HinhAnh2 { get; set; }
+        string HinhAnh3 { get; set; }
+        int BaoHanh { get; set; }
+        string MoTa { get; set; }
+        bool? TrangThai { get; set; }
+        IFormFile UploadHinh1 { get; set; }
+        IFormFile UploadHinh2 { get; set; }
+        IFormFile UploadHinh3 { get; set; }
+
+
         MauxePrototype Clone(int sl);
     }
 

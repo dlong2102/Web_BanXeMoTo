@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Web_BanXeMoTo.Models;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using Web_BanXeMoTo.Decorator;
 
 namespace Web_BanXeMoTo.Controllers
 {
@@ -123,7 +124,32 @@ namespace Web_BanXeMoTo.Controllers
             // Return the view after processing the review submission
             return View(model);
         }
+        public IActionResult Search(string tuKhoa)
+        {
+            // Tạo một đối tượng của lớp TimKiemProductService
+            var searchService = new TimKiemProductService(database);
 
+            // Kiểm tra xem từ khóa trùng với id hoặc TenXe
+            // Trong ví dụ này, bạn cần thay đổi logic kiểm tra để phù hợp với cấu trúc dữ liệu của bạn
+            if (IsId(tuKhoa))
+            {
+                // Nếu từ khóa là id, chuyển hướng đến trang ProductsDetail với id
+                return RedirectToAction("ProductsDetail", new { id = tuKhoa });
+            }
+            else
+            {
+                // Nếu từ khóa không phải là id, tiến hành tìm kiếm bình thường
+                var searchResults = searchService.TimKiemProduct(tuKhoa);
+                return View("Products", searchResults);
+            }
+        }
+
+        // Phương thức kiểm tra xem chuỗi có phải là id không
+        private bool IsId(string input)
+        {
+            // Trong ví dụ này, chúng ta giả định rằng id là một chuỗi có chứa các ký tự số
+            return int.TryParse(input, out _);
+        }
 
 
         public ActionResult Query_Mau_Hang()
