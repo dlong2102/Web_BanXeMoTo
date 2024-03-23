@@ -23,7 +23,7 @@ namespace Web_BanXeMoTo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<QLMoToContext>(options => options.UseSqlServer("Server=DUYLONG;Database=MTKPM;Trusted_Connection=True;"));
+            services.AddDbContext<QLMoToContext>(options => options.UseSqlServer("Server=LAPTOP-IGNO6GRG;Database=moto;Trusted_Connection=True;"));
             services.AddMvc();
             services.AddSession();
 
